@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Song Details | TMuD</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #0a3d34, #1f5b93, #2f7c66);
+            color: #fff;
+        }
+
+        header {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5));
+            color: #fff;
+            padding: 15px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #66fcf1;
+            text-transform: uppercase;
+        }
+
+        .content-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 50px auto;
+            gap: 40px;
+            padding: 20px;
+        }
+
+        .song-image {
+            flex: 1 1 300px;
+            max-width: 300px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .song-details {
+            flex: 2;
+            background: rgba(30, 42, 54, 0.9);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .song-details h1 {
+            font-size: 2.5rem;
+            color: #66fcf1;
+            margin-bottom: 10px;
+        }
+
+        .song-details p {
+            font-size: 1.2rem;
+            color: #ddd;
+        }
+
+        .audio-player {
+            margin-top: 20px;
+        }
+
+        .audio-player audio {
+            width: 100%;
+            border-radius: 10px;
+            outline: none;
+        }
+
+        .song-rating {
+            margin-top: 30px;
+        }
+
+        .rating-dropdown {
+            padding: 8px 15px;
+            font-size: 1rem;
+            margin-right: 10px;
+            border-radius: 5px;
+            border: 1px solid #66fcf1;
+            background-color: #232b35;
+            color: #66fcf1;
+        }
+
+        button {
+            background: #45a29e;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #66fcf1;
+            transform: scale(1.05);
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            background: #45a29e;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: #66fcf1;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo" onclick="redirectToHome()">🎵 TMuD</div>
+    </header>
+
+    <div class="content-container">
+        <!-- Song Image -->
+        <img id="song-image" class="song-image" alt="Song Cover">
+
+        <!-- Song Details Section -->
+        <div class="song-details">
+            <h1 id="song-title">Song Title</h1>
+            <p id="song-artist">By: Artist Name</p>
+
+            <!-- Audio Player -->
+            <div class="audio-player" id="audio-player">
+                <!-- Audio player will be dynamically added here -->
+            </div>
+
+            <!-- Rating Section -->
+            <div class="song-rating">
+                <label for="rating">Rate this song:</label>
+                <select id="rating" class="rating-dropdown" aria-label="Song Rating">
+                    <option value="1">1 - Poor</option>
+                    <option value="2">2 - Fair</option>
+                    <option value="3">3 - Good</option>
+                    <option value="4">4 - Very Good</option>
+                    <option value="5">5 - Excellent</option>
+                </select>
+                <button onclick="submitRating()">Submit Rating</button>
+            </div>
+
+            <!-- Average Rating Section -->
+            <p id="average-rating">Average Rating: <span id="avg-rating">4.6</span> (<span id="total-ratings">5</span> ratings)</p>
+            
+            <!-- Back Button -->
+            <a href="discover.html" class="back-button">Back to Discover</a>
+        </div>
+    </div>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const title = params.get('title');
+        const artist = params.get('artist');
+        const mediaFiles = {
+            "Blinding Lights": {
+                audio: "The Weeknd - Blinding Lights (Official Audio).mp3",
+                image: "u9yfd63sy0141.jpg"
+            },
+            "Shape of You": {
+        audio: "Shape Of You - Ed Sheeran.mp3",
+        image: "Shape_Of_You_(Official_Single_Cover)_by_Ed_Sheeran.png"
+    },
+    "Levitating": {
+        audio: "audio/levitating.mp3",
+        image: "ab67616d0000b273bd26ede1ae69327010d49946.jpeg"
+    },
+    "Rolling in the Deep": {
+        audio: "Rolling in the deep.mp3",
+        image: "artworks-000022631306-gom0xe-t500x500.jpg"
+    },
+    "Believer": {
+        audio: "Imagine Dragons - Believer.mp3",
+        image: "ab67616d0000b2735675e83f707f1d7271e5cf8a.jpeg"
+    },
+    "Bad Guy": {
+        audio: "Morningstar - Billie Eilish - Bad Guy.mp3",
+        image: "Billie_Eilish_-_Bad_Guy.png"
+    },
+    "Stay": {
+        audio: "The Kid LAROI Justin Bieber STAY.mp3",
+        image: "ab67616d00001e0241e31d6ea1d493dd77933ee5.jpeg"
+    },
+    "Sunflower": {
+        audio: "Post Malone_ Swae Lee - Sunflower (Spider-Man_ Int(MP3_128K).mp3",
+        image: "maxresdefault.jpg"
+    },
+    "Peaches": {
+        audio: "audio/peaches.mp3",
+        image: "justin_bieber_feat_daniel_caesar_and_giveon_peaches-577800454-large.jpg"
+    },
+    "Good 4 U": {
+        audio: "Olivia Rodrigo - good 4 u_9.mp3",
+        image: "ab67616d0000b273a91c10fe9472d9bd89802e5a.jpeg"
+    }
+        };
+
+        const media = mediaFiles[title];
+        document.getElementById('song-title').textContent = title || "Unknown Song";
+        document.getElementById('song-artist').textContent = `By: ${artist || "Unknown Artist"}`;
+        document.getElementById('song-image').src = media?.image || 'images/default-cover.jpg';
+
+        const audioElement = document.createElement('audio');
+        audioElement.controls = true;
+        audioElement.src = media?.audio || '';
+        audioElement.onerror = () => {
+            audioElement.textContent = "Audio not available.";
+        };
+        document.getElementById('audio-player').appendChild(audioElement);
+
+        function submitRating() {
+            const rating = parseInt(document.getElementById("rating").value);
+            const avgElem = document.getElementById("avg-rating");
+            const totalElem = document.getElementById("total-ratings");
+            const totalRatings = parseInt(totalElem.textContent);
+            const currentAvg = parseFloat(avgElem.textContent);
+
+            const newAvg = ((currentAvg * totalRatings) + rating) / (totalRatings + 1);
+            avgElem.textContent = newAvg.toFixed(1);
+            totalElem.textContent = totalRatings + 1;
+
+            alert("Thank you for rating!");
+        }
+
+        function redirectToHome() {
+            window.location.href = "index.html";
+        }
+    </script>
+</body>
+</html>

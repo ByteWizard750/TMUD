@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discover | TMuD</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Define Gradient Colors */
+        :root {
+            --dark-gradient-start: #0f0f0f;
+            --dark-gradient-middle: #232b35;
+            --dark-gradient-end: #1b1e23;
+            --blue-gradient-start: #2e3a8c;
+            --blue-gradient-middle: #1f5b93;
+            --green-gradient-start: #0a3d34;
+            --green-gradient-middle: #135c47;
+            --green-gradient-end: #2f7c66;
+        }
+
+        /* General Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, var(--green-gradient-start), var(--blue-gradient-start), var(--blue-gradient-middle), var(--green-gradient-end));
+            color: #fff;
+        }
+
+        header {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5));
+            color: #fff;
+            padding: 15px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #66fcf1;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links li a {
+            color: #d1d1d1;
+            text-decoration: none;
+            font-weight: 400;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links li a:hover {
+            color: #66fcf1;
+        }
+
+        .search-bar {
+            padding: 12px 18px;
+            border: 2px solid #66fcf1;
+            border-radius: 25px;
+            font-size: 1rem;
+            background: #232b35;
+            color: #66fcf1;
+            width: 220px;
+            transition: width 0.3s ease, background-color 0.3s ease;
+        }
+
+        .search-bar:focus {
+            width: 280px;
+            outline: none;
+            background: #2c353f;
+        }
+
+        /* Discover Section */
+        .discover {
+            padding: 60px 20px;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5));
+            border-bottom: 2px solid #66fcf1;
+        }
+
+        .discover h1 {
+            font-size: 3rem;
+            color: #66fcf1;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .discover p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+            color: #ddd;
+        }
+
+        /* Song Grid Section */
+        .song-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .song-card {
+            background: #1e2a36;
+            border-radius: 12px;
+            overflow: hidden;
+            text-align: center;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .song-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .song-card img {
+            max-width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: opacity 0.3s ease;
+        }
+
+        .song-card img:hover {
+            opacity: 0.85;
+        }
+
+        .song-card h3 {
+            color: #66fcf1;
+            font-size: 1.2rem;
+            padding: 15px 0;
+            margin: 0;
+        }
+
+        .song-card p {
+            font-size: 1rem;
+            color: #bbb;
+            margin-bottom: 20px;
+        }
+
+        .song-card button {
+            background: #45a29e;
+            color: #fff;
+            padding: 12px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .song-card button:hover {
+            background-color: none;
+            transform: scale(1.05);
+        }
+
+        /* Footer Section */
+        footer {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5));
+            color: #bbb;
+            text-align: center;
+            padding: 20px 10px;
+            font-size: 0.9rem;
+            border-top: 2px solid #66fcf1;
+        }
+
+        footer a {
+            color: #66fcf1;
+            text-decoration: none;
+            transition: text-decoration 0.3s ease;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="logo" onclick="redirectToHome()">🎵 TMuD</div>
+        <ul class="nav-links">
+            <li><a href="discover.html">Discover</a></li>
+            <li><a href="forum.html">Forum</a></li>
+            <li><a href="about.html">About</a></li>
+        </ul>
+        <input type="text" id="search-bar" placeholder="Search for music..." class="search-bar" onkeyup="handleSearch(event)">
+    </header>
+
+    <!-- Discover Section -->
+    <div class="discover">
+        <h1>Discover New Music</h1>
+        <p>Find your next favorite song. Explore the most trending tracks and hidden gems in the music world.</p>
+    </div>
+
+    <!-- Songs Grid Section -->
+    <section class="song-grid">
+        <!-- Add more song cards here -->
+        <div class="song-card">
+            <img src="u9yfd63sy0141.jpg" alt="Blinding Lights">
+            <h3>Blinding Lights</h3>
+            <p>The Weeknd</p>
+            <button onclick="openSongDetails('Blinding Lights', 'The Weeknd')">View Details</button>
+        </div>
+        <div class="song-card">
+            <img src="Shape_Of_You_(Official_Single_Cover)_by_Ed_Sheeran.png" alt="Shape of You">
+            <h3>Shape of You</h3>
+            <p>Ed Sheeran</p>
+            <button onclick="openSongDetails('Shape of You', 'Ed Sheeran')">View Details</button>
+        </div>
+        <div class="song-card">
+            <img src="ab67616d0000b273bd26ede1ae69327010d49946.jpeg" alt="Levitating">
+            <h3>Levitating</h3>
+            <p>Dua Lipa</p>
+            <button onclick="openSongDetails('Levitating', 'Dua Lipa')">View Details</button>
+        </div>
+        <div class="song-card">
+            <img src="artworks-000022631306-gom0xe-t500x500.jpg" alt="Rolling in the Deep">
+            <h3>Rolling in the Deep</h3>
+            <p>Adele</p>
+            <button onclick="openSongDetails('Rolling in the Deep', 'Adele')">View Details</button>
+        </div>
+        <div class="song-card">
+            <img src="ab67616d0000b2735675e83f707f1d7271e5cf8a.jpeg" alt="Believer">
+            <h3>Believer</h3>
+            <p>Imagine Dragons</p>
+            <button onclick="openSongDetails('Believer', 'Imagine Dragons')">View Details</button>
+        </div>
+        <div class="song-card">
+            <img src="Billie_Eilish_-_Bad_Guy.png" alt="Bad Guy">
+            <h3>Bad Guy</h3>
+            <p>Billie Eilish</p>
+            <button onclick="openSongDetails('Bad Guy', 'Billie Eilish')">View Details</button>
+        </div>
+        <!-- Additional Songs -->
+        <div class="song-card">
+            <img src="ab67616d00001e0241e31d6ea1d493dd77933ee5.jpeg" alt="Stay">
+            <h3>Stay</h3>
+            <p>Justin Bieber & The Kid LAROI</p>
+            <button onclick="openSongDetails('Stay', 'Justin Bieber & The Kid LAROI')">View Details</button>
+        </div>
+        <div class="song-card">
+            <img src="maxresdefault.jpg" alt="Sunflower">
+            <h3>Sunflower</h3>
+            <p>Post Malone & Swae Lee</p>
+            <button onclick="openSongDetails('Sunflower', 'Post Malone & Swae Lee')">View Details</button>
+        </div>
+        <div class="song-card">
+            <img src="justin_bieber_feat_daniel_caesar_and_giveon_peaches-577800454-large.jpg" alt="Peaches">
+            <h3>Peaches</h3>
+            <p>Justin Bieber</p>
+            <button onclick="openSongDetails('Peaches', 'Justin Bieber')">View Details</button>
+        </div>
+        <div class="song-card">
+            <img src="ab67616d0000b273a91c10fe9472d9bd89802e5a.jpeg" alt="Good 4 U">
+            <h3>Good 4 U</h3>
+            <p>Olivia Rodrigo</p>
+            <button onclick="openSongDetails('Good 4 U', 'Olivia Rodrigo')">View Details</button>
+        </div>
+        
+    </section>
+
+    
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2024 TMuD. All Rights Reserved. | <a href="#privacy">Privacy Policy</a></p>
+    </footer>
+
+    <script>
+        // Dataset of songs available in the Discover page
+    const songs = [
+        { title: "Blinding Lights", artist: "The Weeknd" },
+        { title: "Shape of You", artist: "Ed Sheeran" },
+        { title: "Levitating", artist: "Dua Lipa" },
+        { title: "Rolling in the Deep", artist: "Adele" },
+        { title: "Believer", artist: "Imagine Dragons" },
+        { title: "Bad Guy", artist: "Billie Eilish" },
+        { title: "Stay", artist: "Justin Bieber & The Kid LAROI" },
+        { title: "Sunflower", artist: "Post Malone & Swae Lee" },
+        { title: "Peaches", artist: "Justin Bieber" },
+        { title: "Good 4 U", artist: "Olivia Rodrigo" },
+    ];
+
+    // Handle Search Functionality
+    function handleSearch(event) {
+        if (event.key === "Enter") {
+            const searchQuery = event.target.value.trim().toLowerCase();
+            const song = songs.find(
+                s => s.title.toLowerCase() === searchQuery || s.artist.toLowerCase().includes(searchQuery)
+            );
+            if (song) {
+                // Redirect to songs.html with song details
+                openSongDetails(song.title, song.artist);
+            } else {
+                alert("Song not found. Please try again.");
+            }
+        }
+    }
+        // Redirect to Home Page
+        function redirectToHome() {
+            window.location.href = "index.html";
+        }
+
+        // Open Song Details Page
+        function openSongDetails(title, artist) {
+            const url = `songs.html?title=${encodeURIComponent(title)}&artist=${encodeURIComponent(artist)}`;
+            console.log("Navigating to URL:", url); // Debugging line
+            window.location.href = url;
+        }
+    </script>
+</body>
+</html>

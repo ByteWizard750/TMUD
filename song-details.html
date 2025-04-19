@@ -3,41 +3,271 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Song Details - TMuD</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta name="description" content="TMuD - Explore detailed information about your favorite music, artists, and albums.">
+    <title>Song Details | TMuD</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background: #141e30;
+            color: #fff;
+        }
+
+        header {
+            background: #1f2833;
+            color: #fff;
+            padding: 10px 20px;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links li a {
+            color: #66fcf1;
+            text-decoration: none;
+            font-weight: 400;
+        }
+
+        .search-bar {
+            padding: 10px 15px;
+            border: 1px solid #66fcf1;
+            border-radius: 25px;
+            font-size: 1rem;
+            background: #222e38;
+            color: #66fcf1;
+            width: 250px;
+            transition: width 0.3s ease;
+        }
+
+        .search-bar:focus {
+            width: 300px;
+            outline: none;
+            background: #1f2833;
+            border-color: #66fcf1;
+        }
+
+        .hero {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem 1rem;
+            background: linear-gradient(to bottom, #203a43, #141e30);
+            color: #66fcf1;
+            box-shadow: inset 0 -5px 10px rgba(0, 0, 0, 0.3);
+            margin-bottom: 1rem;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .hero p {
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #dcdcdc;
+        }
+
+        .song-page {
+            flex: 1;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 40px;
+            padding: 20px;
+            background: #0f2027;
+        }
+
+        .song-cover-container img {
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            max-width: 100%;
+            max-height: 300px;
+            height: auto;
+        }
+
+        .song-info {
+            max-width: 500px;
+        }
+
+        .song-info h1 {
+            font-size: 2rem;
+            color: #66fcf1;
+        }
+
+        .song-info p {
+            margin: 10px 0;
+            line-height: 1.5;
+        }
+
+        .song-rating {
+            margin-top: 20px;
+        }
+
+        .rating-dropdown {
+            padding: 5px 10px;
+            font-size: 1rem;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            background: #fff;
+            color: #333;
+        }
+
+        button {
+            padding: 8px 15px;
+            border: none;
+            background: #45a29e;
+            color: #fff;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #66fcf1;
+        }
+
+        footer {
+            background: #1f2833;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: #66fcf1;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .song-page {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .song-cover-container img {
+                max-height: 200px;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .song-info h1 {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- Header Section -->
     <header>
         <nav>
-            <div class="logo">🎵 TMuD</div>
+            <div class="logo" onclick="redirectToHome()">🎵 TMuD</div>
             <ul class="nav-links">
-                <li><a href="#trending">Trending</a></li>
-                <li><a href="#forum">Forum</a></li>
-                <li><a href="#about">About</a></li>
+                <li><a href="Discover.html">Discover</a></li>
+                <li><a href="forum.html">Forum</a></li>
+                <li><a href="about.html">About</a></li>
             </ul>
-            <input type="text" placeholder="Search for music..." class="search-bar">
+            <input type="text" id="search-bar" placeholder="Search for music..." class="search-bar" onkeypress="handleSearch(event)">
         </nav>
     </header>
 
-    <section class="song-details">
-        <h2>Song Details</h2>
-        <div class="song-info">
-            <img src="assets/images/song1.jpg" alt="Song Cover">
-            <h3>Blinding Lights</h3>
-            <p>Artist: The Weeknd</p>
-            <p>Album: After Hours</p>
-            <p>Release Date: November 29, 2019</p>
-            <p>Genre: Synthwave, Pop</p>
-            <p>Lyrics: "Oh, I'm blinded by the lights..."</p>
-            <button class="btn">Play Song</button>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Welcome to TMuD</h1>
+            <p>Discover music, lyrics, and stories behind your favorite songs.</p>
         </div>
     </section>
 
+    <!-- Song Details Section -->
+    <div id="song-details" class="song-page">
+        <div class="song-cover-container">
+            <img id="song-cover" src="u9yfd63sy0141.jpg" alt="Song Cover">
+        </div>
+        <div class="song-info">
+            <h1 id="song-title">Blinding Lights</h1>
+            <p id="song-artist">Artist: The Weeknd</p>
+            <p id="song-album">Album: After Hours</p>
+            <p id="song-genre">Genre: Pop</p>
+            <p id="song-release">Release Date: March 20, 2020</p>
+            <p id="song-description">Description: A chart-topping hit with an 80s-inspired sound.</p>
+
+            <!-- Rating Section -->
+            <div class="song-rating">
+                <label for="rating">Rate this song:</label>
+                <select id="rating" class="rating-dropdown" aria-label="Song Rating">
+                    <option value="1">1 - Poor</option>
+                    <option value="2">2 - Fair</option>
+                    <option value="3">3 - Good</option>
+                    <option value="4">4 - Very Good</option>
+                    <option value="5">5 - Excellent</option>
+                </select>
+                <button onclick="submitRating()">Submit Rating</button>
+            </div>
+            <p id="average-rating">Average Rating: <span id="avg-rating">4.6</span> (<span id="total-ratings">5</span> ratings)</p>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
     <footer>
         <p>&copy; 2024 TMuD. All Rights Reserved. | <a href="#privacy">Privacy Policy</a></p>
     </footer>
 
-    <script src="script.js"></script>
+    <!-- JavaScript -->
+    <script>
+        function redirectToHome() {
+            window.location.href = "index.html";
+        }
+
+        function submitRating() {
+            const rating = parseInt(document.getElementById("rating").value);
+            const avgRatingElem = document.getElementById("avg-rating");
+            const totalRatingsElem = document.getElementById("total-ratings");
+
+            let totalRatings = parseInt(totalRatingsElem.textContent);
+            let currentAvg = parseFloat(avgRatingElem.textContent);
+
+            const newAvg = ((currentAvg * totalRatings) + rating) / (totalRatings + 1);
+            avgRatingElem.textContent = newAvg.toFixed(1);
+            totalRatingsElem.textContent = totalRatings + 1;
+
+            alert("Thank you for rating!");
+        }
+    </script>
 </body>
 </html>

@@ -3,43 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forum - TMuD</title>
+    <title>TMuD Forum</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
-<body>
+<body style="background-color: #141e30; color: #fff;">
     <header>
         <nav>
-            <div class="logo">🎵 TMuD</div>
+            <div class="logo" onclick="redirectToHome()">🎵 TMuD</div>
             <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
+                <li><a href="Discover.html">Discover</a></li>
                 <li><a href="forum.html">Forum</a></li>
                 <li><a href="about.html">About</a></li>
             </ul>
-            <input type="text" placeholder="Search for music..." class="search-bar">
+            <input type="text" id="search-bar" placeholder="Search for music..." class="search-bar" onkeypress="handleSearch(event)">
         </nav>
     </header>
 
-    <section class="forum">
-        <h2>Forum Discussions</h2>
-        <div class="forum-thread">
-            <h3>General Discussion</h3>
-            <div class="thread-post">
-                <p>Whats your favorite genre of music and why?</p>
-                <span>Posted by User123 on 12/20/2024</span>
-            </div>
-            <div class="thread-post">
-                <p>Looking for recommendations: Best songs for road trips?</p>
-                <span>Posted by User456 on 12/19/2024</span>
-            </div>
-            <!-- Add more forum threads as needed -->
+    <section class="hero" style="text-align: center; padding: 4rem 2rem; background: linear-gradient(to right, #0f2027, #203a43, #2c5364);">
+        <h1 style="font-size: 2.5rem; color: #66fcf1;">TMuD Forum</h1>
+        <p style="font-size: 1.2rem; color: #fff;">Engage with the community, discuss your favorite songs, and share insights.</p>
+    </section>
+
+    <section id="forum-categories" style="padding: 2rem;">
+        <h2 style="text-align: center; color: #66fcf1;">Discussion Categories</h2>
+        <div class="category-list" style="display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin-top: 2rem;">
+            <a href="#" class="category-card" style="background-color: #1f2833; padding: 1.5rem; border-radius: 8px; text-align: center; color: #fff; width: 250px; text-decoration: none; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                <h3>🎵 Song Recommendations</h3>
+                <p style="font-size: 0.9rem;">Share and discover new songs across genres.</p>
+            </a>
+            <a href="#" class="category-card" style="background-color: #1f2833; padding: 1.5rem; border-radius: 8px; text-align: center; color: #fff; width: 250px; text-decoration: none; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                <h3>📚 Music Education</h3>
+                <p style="font-size: 0.9rem;">Learn about music theory, instruments, and techniques.</p>
+            </a>
+            <a href="#" class="category-card" style="background-color: #1f2833; padding: 1.5rem; border-radius: 8px; text-align: center; color: #fff; width: 250px; text-decoration: none; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                <h3>🔥 Trending Topics</h3>
+                <p style="font-size: 0.9rem;">Discuss the latest happenings in the music industry.</p>
+            </a>
         </div>
     </section>
 
-    <footer>
-        <p>&copy; 2024 TMuD. All Rights Reserved. | <a href="#privacy">Privacy Policy</a></p>
-    </footer>
+    <section id="recent-discussions" style="padding: 2rem; background-color: #0f2027;">
+        <h2 style="text-align: center; color: #66fcf1;">Recent Discussions</h2>
+        <div class="discussion-list" style="display: flex; flex-direction: column; gap: 1.5rem; margin-top: 2rem;">
+            <div class="discussion-card" style="background-color: #1f2833; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                <h3 style="color: #66fcf1;">🎤 Best Vocalists of the Decade</h3>
+                <p style="font-size: 0.9rem; color: #fff;">Started by <strong>MusicLover21</strong> | 45 replies</p>
+            </div>
+            <div class="discussion-card" style="background-color: #1f2833; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                <h3 style="color: #66fcf1;">🎧 Best Headphones for Audiophiles</h3>
+                <p style="font-size: 0.9rem; color: #fff;">Started by <strong>AudioGeek99</strong> | 30 replies</p>
+            </div>
+            <div class="discussion-card" style="background-color: #1f2833; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                <h3 style="color: #66fcf1;">🎶 Favorite Soundtrack Albums</h3>
+                <p style="font-size: 0.9rem; color: #fff;">Started by <strong>FilmScoreFan</strong> | 25 replies</p>
+            </div>
+        </div>
+    </section>
 
-    <script src="script.js"></script>
+    <footer style="background-color: #1f2833; padding: 2rem; text-align: center; color: #fff;">
+        <p>&copy; 2024 TMuD. All Rights Reserved. | <a href="#" style="color: #66fcf1; text-decoration: none;">Privacy Policy</a></p>
+    </footer>
+    <script>
+          function redirectToHome() {
+            window.location.href = "index.html";
+        }
+    </script>
 </body>
 </html>

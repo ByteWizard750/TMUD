@@ -1,53 +1,249 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About TMuD</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About TMuD</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #141e30;
+            color: #fff;
+            margin: 0;
+        }
+
+        header {
+            background-color: #1f2833;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #66fcf1;
+            cursor: pointer;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-links li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .nav-links li a:hover {
+            color: #66fcf1;
+        }
+
+        .search-bar {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #1f2833;
+            color: #fff;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 50px 20px;
+            background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
+        }
+
+        .hero-text h1 {
+            font-size: 48px;
+            color: #66fcf1;
+        }
+
+        .hero-text p {
+            font-size: 18px;
+            line-height: 1.5;
+        }
+
+        #about-details {
+            padding: 40px 20px;
+            text-align: center;
+            max-width: 900px;
+            margin: auto;
+        }
+
+        #about-details h2 {
+            font-size: 28px;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            color: #66fcf1;
+        }
+
+        #about-details p, ul {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #ddd;
+        }
+
+        ul {
+            text-align: left;
+            list-style: none;
+            padding: 0;
+        }
+
+        ul li::before {
+    content: none; 
+}
+
+        .team-section {
+            background-color: #0f2027;
+            padding: 40px 20px;
+        }
+
+        .team-section h2 {
+            color: #66fcf1;
+            margin-bottom: 20px;
+        }
+
+        .team-cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .team-card {
+            background-color: #1f2833;
+            padding: 20px;
+            border-radius: 10px;
+            width: 250px;
+            text-align: center;
+            color: #fff;
+        }
+
+        .team-card img {
+    width: 100px; 
+    height: 100px; 
+    border-radius: 50%; 
+    object-fit: cover; 
+    margin-bottom: 10px; 
+    display: block; 
+    margin-left: auto; 
+    margin-right: auto; 
+}
+
+
+        footer {
+            background-color: #1f2833;
+            text-align: center;
+            padding: 20px;
+        }
+
+        footer .quick-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 10px;
+        }
+
+        footer a {
+            color: #66fcf1;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        footer p {
+            font-size: 12px;
+            color: #fff;
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <nav>
-      <div class="logo">🎵 TMuD</div>
-      <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="#forum">Forum</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <main>
-    <section class="about-section">
-      <div class="container">
-        <h1>About TMuD</h1>
-        <p>
-          TMuD (The Music Database) is your ultimate platform to explore and discover music, lyrics, samples, and more. 
-          Our goal is to bring the vast world of music into a single, accessible database for enthusiasts and professionals alike.
-        </p>
-        <h2>Our Vision</h2>
-        <p>
-          We aim to become the go-to resource for all things music. Whether you're a fan, an artist, or just curious, 
-          TMuD provides tools and resources to connect you with the music you love.
-        </p>
-        <h2>Features</h2>
-        <ul>
-          <li>Discover trending music and artists</li>
-          <li>Explore lyrics and detailed metadata</li>
-          <li>Dive into musical samples and history</li>
-          <li>Join our community forum</li>
+    <header>
+        <div class="logo" onclick="redirectToHome()">🎵 TMuD</div>
+        <ul class="nav-links">
+            <li><a href="Discover.html">Discover</a></li>
+            <li><a href="forum.html">Forum</a></li>
+            <li><a href="about.html">About</a></li>
         </ul>
-        <h2>Contact Us</h2>
-        <p>
-          Have questions or suggestions? Reach out to us at <a href="mailto:support@tmud.com">support@tmud.com</a>.
-        </p>
-      </div>
-    </section>
-  </main>
+        <input type="text" id="search-bar" placeholder="Search for music..." class="search-bar" onkeypress="handleSearch(event)">
+    </header>
 
-  <footer>
-    <p>&copy; 2024 TMuD. All rights reserved.</p>
-  </footer>
+    <section class="hero">
+        <div class="hero-text">
+            <h1>About TMuD</h1>
+            <p>Discover the ultimate music database for songs, lyrics, samples, ratings, and more. Join us on this journey to revolutionize the way we experience music.</p>
+        </div>
+    </section>
+
+    <section id="about-details">
+        <h2>Our Mission</h2>
+        <p>TMuD is dedicated to creating an all-in-one platform for music enthusiasts, providing a seamless experience to explore, share, and celebrate music.</p>
+        
+        <h2>Core Features</h2>
+        <ul>
+            <li>Comprehensive song database with artist and album information.</li>
+            <li>Lyrics, samples, and in-depth details for every track.</li>
+            <li>Community-driven ratings and reviews.</li>
+            <li>Forums for music discussions and discoveries.</li>
+            <li>Educational resources for music theory and trends.</li>
+        </ul>
+    </section>
+
+    <section class="team-section">
+        <h2>Meet Our Team</h2>
+        <div class="team-cards">
+            <div class="team-card">
+                <img src="images.jpeg" alt="Team Member 1">
+                <h3>Steve</h3>
+                <p>Founder & Developer</p>
+            </div>
+            <div class="team-card">
+                <img src="katrina-stripes.jpg" alt="Team Member 2">
+                <h3>Juliee</h3>
+                <p>Creative Director</p>
+            </div>
+            <div class="team-card">
+                <img src="fancast-keanu-reeves-john-wick-as-ghost-rider-v0-v4c42g7l3qxb1.jpg.webp" alt="Team Member 3">
+                <h3>jhonyy</h3>
+                <p>Content Specialist</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="quick-links">
+            <a href="index.html">Home</a>
+            <a href="forum.html">Forum</a>
+            <a href="about.html">About</a>
+            <a href="#privacy">Privacy Policy</a>
+        </div>
+        <p>&copy; 2024 TMuD. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        function redirectToHome() {
+            window.location.href = "index.html";
+        }
+
+        function handleSearch(event) {
+            if (event.key === "Enter") {
+                const query = document.getElementById("search-bar").value.trim();
+                if (query) {
+                    alert(`Searching for: ${query}`);
+                } else {
+                    alert("Please enter a search term.");
+                }
+            }
+        }
+    </script>
 </body>
 </html>
