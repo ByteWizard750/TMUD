@@ -3,69 +3,142 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TMuD Forum</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Forum | TMuD</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
-<body style="background-color: #141e30; color: #fff;">
+<body class="forum">
+    <!-- Header Section -->
     <header>
         <nav>
             <div class="logo" onclick="redirectToHome()">🎵 TMuD</div>
             <ul class="nav-links">
-                <li><a href="Discover.html">Discover</a></li>
+                <li><a href="discover.html">Discover</a></li>
                 <li><a href="forum.html">Forum</a></li>
                 <li><a href="about.html">About</a></li>
             </ul>
-            <input type="text" id="search-bar" placeholder="Search for music..." class="search-bar" onkeypress="handleSearch(event)">
+            <div class="search-container">
+                <input type="text" id="search-bar" placeholder="Search discussions..." class="search-bar" onkeyup="handleSearch(event)">
+                <button class="search-button" onclick="handleSearch({key: 'Enter'})">Search</button>
+            </div>
         </nav>
     </header>
 
-    <section class="hero" style="text-align: center; padding: 4rem 2rem; background: linear-gradient(to right, #0f2027, #203a43, #2c5364);">
-        <h1 style="font-size: 2.5rem; color: #66fcf1;">TMuD Forum</h1>
-        <p style="font-size: 1.2rem; color: #fff;">Engage with the community, discuss your favorite songs, and share insights.</p>
-    </section>
-
-    <section id="forum-categories" style="padding: 2rem;">
-        <h2 style="text-align: center; color: #66fcf1;">Discussion Categories</h2>
-        <div class="category-list" style="display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin-top: 2rem;">
-            <a href="#" class="category-card" style="background-color: #1f2833; padding: 1.5rem; border-radius: 8px; text-align: center; color: #fff; width: 250px; text-decoration: none; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-                <h3>🎵 Song Recommendations</h3>
-                <p style="font-size: 0.9rem;">Share and discover new songs across genres.</p>
-            </a>
-            <a href="#" class="category-card" style="background-color: #1f2833; padding: 1.5rem; border-radius: 8px; text-align: center; color: #fff; width: 250px; text-decoration: none; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-                <h3>📚 Music Education</h3>
-                <p style="font-size: 0.9rem;">Learn about music theory, instruments, and techniques.</p>
-            </a>
-            <a href="#" class="category-card" style="background-color: #1f2833; padding: 1.5rem; border-radius: 8px; text-align: center; color: #fff; width: 250px; text-decoration: none; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-                <h3>🔥 Trending Topics</h3>
-                <p style="font-size: 0.9rem;">Discuss the latest happenings in the music industry.</p>
-            </a>
+    <!-- Forum Section -->
+    <section class="hero">
+        <div class="hero-text">
+            <h1>Music Discussion Forum</h1>
+            <p>Join the conversation. Share your thoughts, discover new music, and connect with fellow music enthusiasts.</p>
         </div>
     </section>
 
-    <section id="recent-discussions" style="padding: 2rem; background-color: #0f2027;">
-        <h2 style="text-align: center; color: #66fcf1;">Recent Discussions</h2>
-        <div class="discussion-list" style="display: flex; flex-direction: column; gap: 1.5rem; margin-top: 2rem;">
-            <div class="discussion-card" style="background-color: #1f2833; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-                <h3 style="color: #66fcf1;">🎤 Best Vocalists of the Decade</h3>
-                <p style="font-size: 0.9rem; color: #fff;">Started by <strong>MusicLover21</strong> | 45 replies</p>
+    <!-- Forum Categories -->
+    <section class="forum-categories">
+        <div class="category-card">
+            <h3>🎵 General Discussion</h3>
+            <p>Talk about anything music-related</p>
+            <span class="thread-count">125 threads</span>
+        </div>
+        <div class="category-card">
+            <h3>🎸 Artist Spotlight</h3>
+            <p>Discuss your favorite artists</p>
+            <span class="thread-count">89 threads</span>
+        </div>
+        <div class="category-card">
+            <h3>🎼 Music Theory</h3>
+            <p>Technical discussions about music</p>
+            <span class="thread-count">42 threads</span>
+        </div>
+        <div class="category-card">
+            <h3>🎧 Recommendations</h3>
+            <p>Share and discover new music</p>
+            <span class="thread-count">156 threads</span>
+        </div>
+    </section>
+
+    <!-- Recent Discussions -->
+    <section class="recent-discussions">
+        <h2>Recent Discussions</h2>
+        <div class="discussion-list">
+            <div class="discussion-card">
+                <div class="discussion-header">
+                    <h3>What's your favorite album of 2024 so far?</h3>
+                    <span class="discussion-meta">Posted by @musiclover • 2 hours ago</span>
+                </div>
+                <p class="discussion-preview">I've been really enjoying the new Dua Lipa album. The production is incredible and the songwriting...</p>
+                <div class="discussion-stats">
+                    <span>💬 24 comments</span>
+                    <span>❤️ 45 likes</span>
+                </div>
             </div>
-            <div class="discussion-card" style="background-color: #1f2833; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-                <h3 style="color: #66fcf1;">🎧 Best Headphones for Audiophiles</h3>
-                <p style="font-size: 0.9rem; color: #fff;">Started by <strong>AudioGeek99</strong> | 30 replies</p>
+            <div class="discussion-card">
+                <div class="discussion-header">
+                    <h3>Best concert you've ever been to?</h3>
+                    <span class="discussion-meta">Posted by @concertgoer • 5 hours ago</span>
+                </div>
+                <p class="discussion-preview">Saw Coldplay last summer and it was absolutely magical. The energy, the lights, the crowd...</p>
+                <div class="discussion-stats">
+                    <span>💬 18 comments</span>
+                    <span>❤️ 32 likes</span>
+                </div>
             </div>
-            <div class="discussion-card" style="background-color: #1f2833; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-                <h3 style="color: #66fcf1;">🎶 Favorite Soundtrack Albums</h3>
-                <p style="font-size: 0.9rem; color: #fff;">Started by <strong>FilmScoreFan</strong> | 25 replies</p>
+            <div class="discussion-card">
+                <div class="discussion-header">
+                    <h3>Underrated artists that deserve more recognition</h3>
+                    <span class="discussion-meta">Posted by @musicdiscoverer • 1 day ago</span>
+                </div>
+                <p class="discussion-preview">I recently discovered this amazing indie artist named Phoebe Bridgers. Her songwriting is...</p>
+                <div class="discussion-stats">
+                    <span>💬 36 comments</span>
+                    <span>❤️ 52 likes</span>
+                </div>
             </div>
         </div>
     </section>
 
-    <footer style="background-color: #1f2833; padding: 2rem; text-align: center; color: #fff;">
-        <p>&copy; 2024 TMuD. All Rights Reserved. | <a href="#" style="color: #66fcf1; text-decoration: none;">Privacy Policy</a></p>
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-logo">
+                <div class="logo">🎵 <span class="logo-text">TMuD</span></div>
+                <p>Your ultimate music companion for exploring songs worldwide.</p>
+            </div>
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="forum.html">Forum</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="#privacy">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-social">
+                <h3>Follow Us</h3>
+                <div class="social-icons">
+                    <a href="www.facebook.com"><img src="assets/images/facebook.png" alt="Facebook"></a>
+                    <a href="https://x.com/home"><img src="assets/images/twitter.png" alt="Twitter"></a>
+                    <a href="https://www.instagram.com"><img src="assets/images/instagram.png" alt="Instagram"></a>
+                    <a href="https://www.youtube.com"><img src="assets/images/youtube.png" alt="YouTube"></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 TMuD. All Rights Reserved. | <a href="#privacy">Privacy Policy</a></p>
+        </div>
     </footer>
+
     <script>
-          function redirectToHome() {
+        // Handle Search Functionality
+        function handleSearch(event) {
+            if (event.key === "Enter") {
+                const searchQuery = event.target.value.trim().toLowerCase();
+                // Implement forum search functionality
+                alert("Forum search coming soon!");
+            }
+        }
+
+        // Redirect to Home Page
+        function redirectToHome() {
             window.location.href = "index.html";
         }
     </script>

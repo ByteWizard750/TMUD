@@ -9,7 +9,6 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <script defer src="script.js"></script>
-    <link rel="JavaScript" href="script.js">
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -49,7 +48,7 @@
             font-weight: bold;
             cursor: pointer;
             color: #66fcf1;
-            border-bottom: 2px solid transparent;k
+            border-bottom: 2px solid transparent;
             transition: all 0.3s ease-in-out;
         }
 
@@ -101,7 +100,7 @@
         }
     </style>
 </head>
-<body>
+<body class="index">
     <!-- Header Section -->
     <header>
         <nav>
@@ -124,11 +123,10 @@
             <!-- Login Feature -->
             <div class="login-container">
                 <img 
-                    src="1713924.webp" 
+                    src="Images/1713924.webp" 
                     alt="Login Icon" 
                     class="login-icon" 
                     onclick="toggleAuthInterface()" 
-                    style="width: 30px; height: 30px; cursor: pointer;"
                 >
             </div>
         </nav>
@@ -143,66 +141,65 @@
           <div id="signupTab" class="auth-tab" onclick="switchAuthTab('signup')">Sign Up</div>
       </div>
       <div id="loginForm" class="auth-form">
-          <input type="email" placeholder="Email" required>
-          <input type="password" placeholder="Password" required>
-          <button>Login</button>
+          <h3>Welcome Back</h3>
+          <div class="form-group">
+              <label for="loginEmail">Email</label>
+              <input type="email" id="loginEmail" placeholder="Enter your email" required>
+          </div>
+          <div class="form-group">
+              <label for="loginPassword">Password</label>
+              <input type="password" id="loginPassword" placeholder="Enter your password" required>
+          </div>
+          <button onclick="handleAuth('login')">Sign In</button>
       </div>
       <div id="signupForm" class="auth-form hidden">
-          <input type="text" placeholder="Full Name" required>
-          <input type="email" placeholder="Email" required>
-          <input type="password" placeholder="Password" required>
-          <button>Sign Up</button>
+          <h3>Create Account</h3>
+          <div class="form-group">
+              <label for="signupName">Full Name</label>
+              <input type="text" id="signupName" placeholder="Enter your full name" required>
+          </div>
+          <div class="form-group">
+              <label for="signupEmail">Email</label>
+              <input type="email" id="signupEmail" placeholder="Enter your email" required>
+          </div>
+          <div class="form-group">
+              <label for="signupPassword">Password</label>
+              <input type="password" id="signupPassword" placeholder="Create a password" required>
+          </div>
+          <button onclick="handleAuth('signup')">Sign Up</button>
       </div>
   </div>
-    <!-- Login/Signup Interface -->
-    <div id="authInterface" class="auth-interface hidden">
-        <div class="auth-tabs">
-            <button id="loginTab" class="auth-tab active" onclick="switchAuthTab('login')">Sign In</button>
-            <button id="signupTab" class="auth-tab" onclick="switchAuthTab('signup')">Sign Up</button>
-        </div>
-        <div id="loginForm" class="auth-form">
-            <input type="email" placeholder="Email" required>
-            <input type="password" placeholder="Password" required>
-            <button>Login</button>
-        </div>
-        <div id="signupForm" class="auth-form hidden">
-            <input type="text" placeholder="Full Name" required>
-            <input type="email" placeholder="Email" required>
-            <input type="password" placeholder="Password" required>
-            <button>Sign Up</button>
-        </div>
-    </div>
     
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-text">
-            <h1>Welcome to TMuD</h1>
-            <p>Your one-stop database for music, lyrics, and more!</p>
-            <a href="#trending" class="btn">Explore Trending</a>
+            <h1>Discover Your Next Favorite Song</h1>
+            <p>Explore millions of tracks, create playlists, and share your music with the world.</p>
+            <a href="#trending" class="btn">Start Exploring</a>
         </div>
     </section>
 
     <!-- Trending Section -->
     <section id="trending">
-        <h2>Trending Songs</h2>
+        <h2>Trending Now</h2>
         <div class="cards">
             <div class="card">
-                <a href="song-details.html?title=blinding%20lights">
-                    <img src="u9yfd63sy0141.jpg" alt="Blinding Lights Cover">
+                <a href="song-details.html?title=Blinding Lights">
+                    <img src="assets/images/blinding-lights.jpg" alt="Blinding Lights Cover">
                     <h3>Blinding Lights</h3>
                     <p>The Weeknd</p>
                 </a>
             </div>
             <div class="card">
-                <a href="song-details.html?title=shallow">
-                    <img src="lady-gaga-feat-bradley-cooper-shallow.jpg" alt="Shallow Cover">
+                <a href="song-details.html?title=Shallow">
+                    <img src="assets/images/shallow.jpg" alt="Shallow Cover">
                     <h3>Shallow</h3>
                     <p>Lady Gaga & Bradley Cooper</p>
                 </a>
             </div>
             <div class="card">
-                <a href="song-details.html?title=levitating">
-                    <img src="ab67616d0000b273bd26ede1ae69327010d49946.jpeg" alt="Levitating Cover">
+                <a href="song-details.html?title=Levitating">
+                    <img src="assets/images/levitating.jpg" alt="Levitating Cover">
                     <h3>Levitating</h3>
                     <p>Dua Lipa</p>
                 </a>
@@ -213,13 +210,10 @@
     <!-- Footer Section -->
     <footer class="footer">
         <div class="footer-container">
-            <!-- Logo Section -->
             <div class="footer-logo">
-                <div class="logo">🎵 <span class="logo-text">TMuD</span></div>
+                <div class="logo">🎵 TMuD</div>
                 <p>Your ultimate music companion for exploring songs worldwide.</p>
             </div>
-    
-            <!-- Quick Links -->
             <div class="footer-links">
                 <h3>Quick Links</h3>
                 <ul>
@@ -229,31 +223,16 @@
                     <li><a href="#privacy">Privacy Policy</a></li>
                 </ul>
             </div>
-    
-            <!-- Explore More -->
-            <div class="footer-explore">
-                <h3>Explore</h3>
-                <ul>
-                    <li><a href="#trending">Trending Songs</a></li>
-                    <li><a href="#genres">Popular Genres</a></li>
-                    <li><a href="#artists">Top Artists</a></li>
-                    <li><a href="#albums">Featured Albums</a></li>
-                </ul>
-            </div>
-    
-            <!-- Follow Us -->
             <div class="footer-social">
                 <h3>Follow Us</h3>
                 <div class="social-icons">
-                    <a href="www.facebook.com"><img src="Facebook-Logosu.png" alt="Facebook"></a>
-                    <a href="https://x.com/home"><img src="Twitter-icon-design-on-transparent-background-PNG.png" alt="Twitter"></a>
-                    <a href="https://www.instagram.com"><img src="social-media-instagram-icon-transparent-background-172928815.jpg.webp" alt="Instagram"></a>
-                    <a href="https://www.youtube.com"><img src="png-transparent-youtube-logo-youtube-red-logo-computer-icons-youtube-television-angle-rectangle.png" alt="YouTube"></a>
+                    <a href="www.facebook.com"><img src="assets/images/facebook.png" alt="Facebook"></a>
+                    <a href="https://x.com/home"><img src="assets/images/twitter.png" alt="Twitter"></a>
+                    <a href="https://www.instagram.com"><img src="assets/images/instagram.png" alt="Instagram"></a>
+                    <a href="https://www.youtube.com"><img src="assets/images/youtube.png" alt="YouTube"></a>
                 </div>
             </div>
         </div>
-    
-        <!-- Footer Bottom -->
         <div class="footer-bottom">
             <p>&copy; 2024 TMuD. All Rights Reserved. | <a href="#privacy">Privacy Policy</a></p>
         </div>

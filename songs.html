@@ -170,51 +170,51 @@
         const artist = params.get('artist');
         const mediaFiles = {
             "Blinding Lights": {
-                audio: "The Weeknd - Blinding Lights (Official Audio).mp3",
-                image: "u9yfd63sy0141.jpg"
+                audio: "songs/The Weeknd - Blinding Lights (Official Audio).mp3",
+                image: "Images/u9yfd63sy0141.jpg"
             },
             "Shape of You": {
-        audio: "Shape Of You - Ed Sheeran.mp3",
-        image: "Shape_Of_You_(Official_Single_Cover)_by_Ed_Sheeran.png"
-    },
-    "Levitating": {
-        audio: "audio/levitating.mp3",
-        image: "ab67616d0000b273bd26ede1ae69327010d49946.jpeg"
-    },
-    "Rolling in the Deep": {
-        audio: "Rolling in the deep.mp3",
-        image: "artworks-000022631306-gom0xe-t500x500.jpg"
-    },
-    "Believer": {
-        audio: "Imagine Dragons - Believer.mp3",
-        image: "ab67616d0000b2735675e83f707f1d7271e5cf8a.jpeg"
-    },
-    "Bad Guy": {
-        audio: "Morningstar - Billie Eilish - Bad Guy.mp3",
-        image: "Billie_Eilish_-_Bad_Guy.png"
-    },
-    "Stay": {
-        audio: "The Kid LAROI Justin Bieber STAY.mp3",
-        image: "ab67616d00001e0241e31d6ea1d493dd77933ee5.jpeg"
-    },
-    "Sunflower": {
-        audio: "Post Malone_ Swae Lee - Sunflower (Spider-Man_ Int(MP3_128K).mp3",
-        image: "maxresdefault.jpg"
-    },
-    "Peaches": {
-        audio: "audio/peaches.mp3",
-        image: "justin_bieber_feat_daniel_caesar_and_giveon_peaches-577800454-large.jpg"
-    },
-    "Good 4 U": {
-        audio: "Olivia Rodrigo - good 4 u_9.mp3",
-        image: "ab67616d0000b273a91c10fe9472d9bd89802e5a.jpeg"
-    }
+                audio: "songs/Shape Of You - Ed Sheeran.mp3",
+                image: "Images/Shape_Of_You_(Official_Single_Cover)_by_Ed_Sheeran.png"
+            },
+            "Levitating": {
+                audio: "songs/levitating.mp3",
+                image: "Images/ab67616d0000b273bd26ede1ae69327010d49946.jpeg"
+            },
+            "Rolling in the Deep": {
+                audio: "songs/Rolling in the deep.mp3",
+                image: "Images/artworks-000022631306-gom0xe-t500x500.jpg"
+            },
+            "Believer": {
+                audio: "songs/Imagine Dragons - Believer.mp3",
+                image: "Images/ab67616d0000b2735675e83f707f1d7271e5cf8a.jpeg"
+            },
+            "Bad Guy": {
+                audio: "songs/Morningstar - Billie Eilish - Bad Guy.mp3",
+                image: "Images/Billie_Eilish_-_Bad_Guy.png"
+            },
+            "Stay": {
+                audio: "songs/The Kid LAROI Justin Bieber STAY.mp3",
+                image: "Images/ab67616d00001e0241e31d6ea1d493dd77933ee5.jpeg"
+            },
+            "Sunflower": {
+                audio: "songs/Post Malone_ Swae Lee - Sunflower (Spider-Man_ Int(MP3_128K).mp3",
+                image: "Images/maxresdefault.jpg"
+            },
+            "Peaches": {
+                audio: "songs/peaches.mp3",
+                image: "Images/justin_bieber_feat_daniel_caesar_and_giveon_peaches-577800454-large.jpg"
+            },
+            "Good 4 U": {
+                audio: "songs/Olivia Rodrigo - good 4 u_9.mp3",
+                image: "Images/ab67616d0000b273a91c10fe9472d9bd89802e5a.jpeg"
+            }
         };
 
         const media = mediaFiles[title];
         document.getElementById('song-title').textContent = title || "Unknown Song";
         document.getElementById('song-artist').textContent = `By: ${artist || "Unknown Artist"}`;
-        document.getElementById('song-image').src = media?.image || 'images/default-cover.jpg';
+        document.getElementById('song-image').src = media?.image || 'Images/default-cover.jpg';
 
         const audioElement = document.createElement('audio');
         audioElement.controls = true;

@@ -1,3 +1,5 @@
+console.log('script.js loaded and running!');
+
 // Song Database
 const songDatabase = [
     {
@@ -114,13 +116,233 @@ const songData = {
     ratings: [5, 4, 3, 4, 5], // Existing ratings
 };
 
-/// Toggle the display of the auth interface
-function toggleAuthInterface() {
-    const authInterface = document.getElementById("authInterface");
-    authInterface.classList.toggle("hidden");
+// Authentication State with Local Storage
+let authState = {
+    isAuthenticated: false,
+    currentUser: null
+};
+
+// Initialize auth state from localStorage
+function initAuthState() {
+    const savedAuth = localStorage.getItem('authState');
+    if (savedAuth) {
+        authState = JSON.parse(savedAuth);
+        updateUIForAuth();
+    }
 }
 
-// Switch between login and signup tabs
+// Save auth state to localStorage
+function saveAuthState() {
+    localStorage.setItem('authState', JSON.stringify(authState));
+}
+
+// Handle Authentication
+async function handleAuth(formType) {
+    try {
+        const form = document.getElementById(`${formType}Form`);
+        form.classList.add('loading');
+        let formData;
+        if (formType === 'login') {
+            formData = {
+                email: document.getElementById('loginEmail').value,
+                password: document.getElementById('loginPassword').value
+            };
+        } else {
+            formData = {
+                name: document.getElementById('signupName').value,
+                email: document.getElementById('signupEmail').value,
+                password: document.getElementById('signupPassword').value
+            };
+        }
+        // Validate form data
+        if (!validateFormData(formData)) {
+            throw new Error('Invalid form data');
+        }
+        // Simulate API call (replace with actual API call)
+        const response = await simulateAuthAPI(formType, formData);
+        if (response.success) {
+            authState.isAuthenticated = true;
+            authState.currentUser = response.user;
+            saveAuthState();
+            showAuthFeedback(`${formType === 'login' ? 'Welcome back, ' + response.user.name + '!' : 'Account created! Welcome, ' + response.user.name + '!'}`, 'success');
+            setTimeout(() => {
+                closeAuthInterface();
+                updateUIForAuth();
+            }, 1200);
+        } else {
+            throw new Error(response.message);
+        }
+    } catch (error) {
+        showAuthFeedback(error.message, 'error');
+    } finally {
+        const form = document.getElementById(`${formType}Form`);
+        form.classList.remove('loading');
+    }
+}
+
+// Form Validation
+function validateFormData(formData) {
+    const { email, password, name } = formData;
+    
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        throw new Error('Invalid email format');
+    }
+
+    // Password validation
+    if (password.length < 8) {
+        throw new Error('Password must be at least 8 characters long');
+    }
+
+    // Name validation for signup
+    if (formData.name && name.length < 2) {
+        throw new Error('Name must be at least 2 characters long');
+    }
+
+    return true;
+}
+
+// Simulate API call (replace with actual API call)
+async function simulateAuthAPI(formType, formData) {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            if (formType === 'login') {
+                // Check if user exists in localStorage
+                const users = JSON.parse(localStorage.getItem('users') || '[]');
+                const user = users.find(u => u.email === formData.email && u.password === formData.password);
+                
+                if (user) {
+                    resolve({
+                        success: true,
+                        user: {
+                            name: user.name,
+                            email: user.email
+                        }
+                    });
+                } else {
+                    resolve({
+                        success: false,
+                        message: 'Invalid email or password'
+                    });
+                }
+            } else {
+                // Signup - save user to localStorage
+                const users = JSON.parse(localStorage.getItem('users') || '[]');
+                if (users.some(u => u.email === formData.email)) {
+                    resolve({
+                        success: false,
+                        message: 'Email already registered'
+                    });
+                } else {
+                    users.push({
+                        name: formData.name,
+                        email: formData.email,
+                        password: formData.password
+                    });
+                    localStorage.setItem('users', JSON.stringify(users));
+                    
+                    resolve({
+                        success: true,
+                        user: {
+                            name: formData.name,
+                            email: formData.email
+                        }
+                    });
+                }
+            }
+        }, 1000);
+    });
+}
+
+// Show Error Message
+function showErrorMessage(message) {
+    const errorDiv = document.createElement('div');
+    errorDiv.className = 'error-message';
+    errorDiv.textContent = message;
+    
+    const authInterface = document.getElementById('authInterface');
+    const existingError = authInterface.querySelector('.error-message');
+    if (existingError) {
+        existingError.remove();
+    }
+    authInterface.insertBefore(errorDiv, authInterface.firstChild);
+    
+    setTimeout(() => {
+        errorDiv.remove();
+    }, 3000);
+}
+
+// Show Success Message
+function showSuccessMessage(message) {
+    const successDiv = document.createElement('div');
+    successDiv.className = 'success-message';
+    successDiv.textContent = message;
+    
+    const authInterface = document.getElementById('authInterface');
+    const existingSuccess = authInterface.querySelector('.success-message');
+    if (existingSuccess) {
+        existingSuccess.remove();
+    }
+    authInterface.insertBefore(successDiv, authInterface.firstChild);
+    
+    setTimeout(() => {
+        successDiv.remove();
+    }, 3000);
+}
+
+// Update UI based on authentication state
+function updateUIForAuth() {
+    const loginIcon = document.querySelector('.login-icon');
+    if (authState.isAuthenticated) {
+        loginIcon.src = 'Images/1713924.webp'; // Using existing image
+        loginIcon.title = authState.currentUser.name;
+        loginIcon.onclick = handleLogout;
+        
+        // Show user info in console for debugging
+        console.log('Current User:', authState.currentUser);
+        console.log('All Users:', JSON.parse(localStorage.getItem('users') || '[]'));
+    } else {
+        loginIcon.src = 'Images/1713924.webp';
+        loginIcon.title = 'Login';
+        loginIcon.onclick = toggleAuthInterface;
+    }
+}
+
+// Handle Logout
+function handleLogout() {
+    authState.isAuthenticated = false;
+    authState.currentUser = null;
+    saveAuthState();
+    updateUIForAuth();
+    showSuccessMessage('Logged out successfully!');
+}
+
+// Toggle Authentication Interface
+function toggleAuthInterface() {
+    const authInterface = document.getElementById('authInterface');
+    const overlay = document.getElementById('overlay');
+    
+    authInterface.classList.toggle('hidden');
+    overlay.classList.toggle('hidden');
+    
+    // Reset forms when opening
+    if (!authInterface.classList.contains('hidden')) {
+        document.getElementById('loginForm').reset();
+        document.getElementById('signupForm').reset();
+    }
+}
+
+// Close Authentication Interface
+function closeAuthInterface() {
+    const authInterface = document.getElementById('authInterface');
+    const overlay = document.getElementById('overlay');
+    
+    authInterface.classList.add('hidden');
+    overlay.classList.add('hidden');
+}
+
+// Switch Authentication Tab
 function switchAuthTab(tab) {
     const loginTab = document.getElementById("loginTab");
     const signupTab = document.getElementById("signupTab");
@@ -138,6 +360,28 @@ function switchAuthTab(tab) {
         signupForm.classList.remove("hidden");
         loginForm.classList.add("hidden");
     }
+}
+
+// Show feedback message in the auth interface
+function showAuthFeedback(message, type = 'success') {
+    const authInterface = document.getElementById('authInterface');
+    let feedback = document.getElementById('authFeedback');
+    if (!feedback) {
+        feedback = document.createElement('div');
+        feedback.id = 'authFeedback';
+        feedback.style.marginBottom = '15px';
+        feedback.style.textAlign = 'center';
+        feedback.style.fontWeight = 'bold';
+        authInterface.insertBefore(feedback, authInterface.children[1]);
+    }
+    feedback.textContent = message;
+    feedback.style.color = type === 'success' ? '#1DB954' : '#e74c3c';
+    feedback.style.background = type === 'success' ? 'rgba(29,185,84,0.1)' : 'rgba(231,76,60,0.1)';
+    feedback.style.borderRadius = '6px';
+    feedback.style.padding = '8px 0';
+    setTimeout(() => {
+        if (feedback) feedback.remove();
+    }, 2500);
 }
 
 // Function to populate song details
@@ -225,4 +469,50 @@ function loadSearchResults() {
 
 // Load results when the page loads
 document.addEventListener("DOMContentLoaded", loadSearchResults);
+
+// Initialize auth state when page loads
+document.addEventListener('DOMContentLoaded', () => {
+    // Ensure only login form is visible on load
+    document.getElementById('loginForm').classList.remove('hidden');
+    document.getElementById('signupForm').classList.add('hidden');
+    // Add debug button
+    const debugButton = document.createElement('button');
+    debugButton.textContent = 'View Saved Data';
+    debugButton.onclick = viewSavedData;
+    debugButton.style.position = 'fixed';
+    debugButton.style.bottom = '10px';
+    debugButton.style.right = '10px';
+    debugButton.style.padding = '10px';
+    debugButton.style.background = '#45a29e';
+    debugButton.style.color = 'white';
+    debugButton.style.border = 'none';
+    debugButton.style.borderRadius = '5px';
+    debugButton.style.cursor = 'pointer';
+    document.body.appendChild(debugButton);
+});
+
+// View Saved Data (for debugging)
+function viewSavedData() {
+    const users = JSON.parse(localStorage.getItem('users') || '[]');
+    const authState = JSON.parse(localStorage.getItem('authState') || '{}');
+    
+    console.log('All Users:', users);
+    console.log('Auth State:', authState);
+    
+    // Show in UI
+    const debugInfo = document.createElement('div');
+    debugInfo.className = 'debug-info';
+    debugInfo.innerHTML = `
+        <h3>Debug Information</h3>
+        <p>Total Users: ${users.length}</p>
+        <p>Current Auth State: ${JSON.stringify(authState)}</p>
+    `;
+    
+    const existingDebug = document.querySelector('.debug-info');
+    if (existingDebug) {
+        existingDebug.remove();
+    }
+    
+    document.body.appendChild(debugInfo);
+}
 

@@ -6,188 +6,107 @@
     <meta name="description" content="TMuD - Explore detailed information about your favorite music, artists, and albums.">
     <title>Song Details | TMuD</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
     <style>
-        /* General Styles */
         body {
+            background: var(--background-color, #121212);
+            color: var(--text-color, #fff);
             font-family: 'Poppins', sans-serif;
             margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
             min-height: 100vh;
-            background: #141e30;
-            color: #fff;
         }
-
-        header {
-            background: #1f2833;
-            color: #fff;
-            padding: 10px 20px;
-        }
-
-        nav {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 600;
-            cursor: pointer;
-        }
-
-        .nav-links {
-            list-style: none;
-            display: flex;
-            gap: 20px;
-        }
-
-        .nav-links li a {
-            color: #66fcf1;
-            text-decoration: none;
-            font-weight: 400;
-        }
-
-        .search-bar {
-            padding: 10px 15px;
-            border: 1px solid #66fcf1;
-            border-radius: 25px;
-            font-size: 1rem;
-            background: #222e38;
-            color: #66fcf1;
-            width: 250px;
-            transition: width 0.3s ease;
-        }
-
-        .search-bar:focus {
-            width: 300px;
-            outline: none;
-            background: #1f2833;
-            border-color: #66fcf1;
-        }
-
-        .hero {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 2rem 1rem;
-            background: linear-gradient(to bottom, #203a43, #141e30);
-            color: #66fcf1;
-            box-shadow: inset 0 -5px 10px rgba(0, 0, 0, 0.3);
-            margin-bottom: 1rem;
-        }
-
-        .hero-content {
-            max-width: 800px;
-        }
-
-        .hero h1 {
-            font-size: 2.2rem;
-            margin-bottom: 0.8rem;
-        }
-
-        .hero p {
-            font-size: 1rem;
-            line-height: 1.5;
-            color: #dcdcdc;
-        }
-
-        .song-page {
-            flex: 1;
+        .song-details-container {
+            max-width: 900px;
+            margin: 7rem auto 2rem auto;
+            background: rgba(25, 20, 20, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.25);
             display: flex;
             flex-wrap: wrap;
-            justify-content: center;
+            gap: 2.5rem;
+            padding: 2.5rem;
             align-items: flex-start;
-            gap: 40px;
-            padding: 20px;
-            background: #0f2027;
         }
-
-        .song-cover-container img {
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            max-width: 100%;
-            max-height: 300px;
-            height: auto;
+        .song-cover {
+            flex: 1 1 260px;
+            max-width: 260px;
+            border-radius: 15px;
+            box-shadow: 0 4px 16px rgba(29,185,84,0.15);
+            object-fit: cover;
+            background: #232323;
+            min-height: 260px;
         }
-
         .song-info {
-            max-width: 500px;
+            flex: 2 1 350px;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
         }
-
         .song-info h1 {
-            font-size: 2rem;
-            color: #66fcf1;
+            font-size: 2.2rem;
+            color: var(--accent-color, #1DB954);
+            margin-bottom: 0.5rem;
         }
-
         .song-info p {
-            margin: 10px 0;
-            line-height: 1.5;
+            font-size: 1.1rem;
+            color: #e0e0e0;
+            margin: 0.2rem 0;
         }
-
         .song-rating {
-            margin-top: 20px;
+            margin-top: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
         }
-
         .rating-dropdown {
-            padding: 5px 10px;
-            font-size: 1rem;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            background: #fff;
-            color: #333;
-        }
-
-        button {
             padding: 8px 15px;
-            border: none;
-            background: #45a29e;
-            color: #fff;
             font-size: 1rem;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background 0.3s;
+            border-radius: 8px;
+            border: 1.5px solid var(--accent-color, #1DB954);
+            background: #181818;
+            color: var(--accent-color, #1DB954);
+            margin-right: 10px;
         }
-
-        button:hover {
-            background: #66fcf1;
-        }
-
-        footer {
-            background: #1f2833;
+        .song-rating button {
+            background: var(--accent-color, #1DB954);
             color: #fff;
-            text-align: center;
-            padding: 10px;
-            font-size: 0.9rem;
+            padding: 10px 22px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
         }
-
-        footer a {
-            color: #66fcf1;
+        .song-rating button:hover {
+            background: #66fcf1;
+            color: #191414;
+            transform: translateY(-2px);
+        }
+        .back-button {
+            display: inline-block;
+            margin-top: 2rem;
+            background: #232323;
+            color: var(--accent-color, #1DB954);
+            padding: 10px 22px;
             text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            border: 1.5px solid var(--accent-color, #1DB954);
+            transition: background 0.2s, color 0.2s;
         }
-
-        footer a:hover {
-            text-decoration: underline;
+        .back-button:hover {
+            background: var(--accent-color, #1DB954);
+            color: #fff;
         }
-
-        @media (max-width: 768px) {
-            .song-page {
+        @media (max-width: 900px) {
+            .song-details-container {
                 flex-direction: column;
-                text-align: center;
+                align-items: center;
+                padding: 1.5rem;
             }
-
-            .song-cover-container img {
-                max-height: 200px;
-            }
-
-            .hero h1 {
-                font-size: 1.8rem;
-            }
-
-            .song-info h1 {
-                font-size: 1.6rem;
+            .song-cover {
+                margin-bottom: 1.5rem;
             }
         }
     </style>
@@ -206,28 +125,17 @@
         </nav>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Welcome to TMuD</h1>
-            <p>Discover music, lyrics, and stories behind your favorite songs.</p>
-        </div>
-    </section>
-
     <!-- Song Details Section -->
-    <div id="song-details" class="song-page">
-        <div class="song-cover-container">
-            <img id="song-cover" src="u9yfd63sy0141.jpg" alt="Song Cover">
-        </div>
+    <div class="song-details-container">
+        <img id="song-cover" class="song-cover" src="" alt="Song Cover">
         <div class="song-info">
-            <h1 id="song-title">Blinding Lights</h1>
-            <p id="song-artist">Artist: The Weeknd</p>
-            <p id="song-album">Album: After Hours</p>
-            <p id="song-genre">Genre: Pop</p>
-            <p id="song-release">Release Date: March 20, 2020</p>
-            <p id="song-description">Description: A chart-topping hit with an 80s-inspired sound.</p>
-
-            <!-- Rating Section -->
+            <h1 id="song-title">Song Title</h1>
+            <p id="song-artist">Artist: </p>
+            <p id="song-album">Album: </p>
+            <p id="song-genre">Genre: </p>
+            <p id="song-release">Release Date: </p>
+            <p id="song-description">Description: </p>
+            <div class="audio-player" id="audio-player"></div>
             <div class="song-rating">
                 <label for="rating">Rate this song:</label>
                 <select id="rating" class="rating-dropdown" aria-label="Song Rating">
@@ -240,33 +148,195 @@
                 <button onclick="submitRating()">Submit Rating</button>
             </div>
             <p id="average-rating">Average Rating: <span id="avg-rating">4.6</span> (<span id="total-ratings">5</span> ratings)</p>
+            <a href="Discover.html" class="back-button">← Back to Discover</a>
         </div>
     </div>
 
     <!-- Footer Section -->
-    <footer>
-        <p>&copy; 2024 TMuD. All Rights Reserved. | <a href="#privacy">Privacy Policy</a></p>
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-logo">
+                <div class="logo">🎵 <span class="logo-text">TMuD</span></div>
+                <p>Your ultimate music companion for exploring songs worldwide.</p>
+            </div>
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="forum.html">Forum</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="#privacy">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-social">
+                <h3>Follow Us</h3>
+                <div class="social-icons">
+                    <a href="www.facebook.com"><img src="assets/images/facebook.png" alt="Facebook"></a>
+                    <a href="https://x.com/home"><img src="assets/images/twitter.png" alt="Twitter"></a>
+                    <a href="https://www.instagram.com"><img src="assets/images/instagram.png" alt="Instagram"></a>
+                    <a href="https://www.youtube.com"><img src="assets/images/youtube.png" alt="YouTube"></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 TMuD. All Rights Reserved. | <a href="#privacy">Privacy Policy</a></p>
+        </div>
     </footer>
 
-    <!-- JavaScript -->
     <script>
+        // Song data for demo (in real app, fetch from backend or pass via query params)
+        const params = new URLSearchParams(window.location.search);
+        const title = params.get('title') || 'Blinding Lights';
+        const songData = {
+            "Blinding Lights": {
+                artist: "The Weeknd",
+                album: "After Hours",
+                genre: "Pop",
+                release: "March 20, 2020",
+                description: "A chart-topping hit with an 80s-inspired sound.",
+                cover: "Images/u9yfd63sy0141.jpg"
+            },
+            "Shape of You": {
+                artist: "Ed Sheeran",
+                album: "Divide",
+                genre: "Pop",
+                release: "Jan 6, 2017",
+                description: "One of the best-selling digital singles worldwide.",
+                cover: "Images/Shape_Of_You_(Official_Single_Cover)_by_Ed_Sheeran.png"
+            },
+            "Levitating": {
+                artist: "Dua Lipa",
+                album: "Future Nostalgia",
+                genre: "Disco-pop",
+                release: "Oct 1, 2020",
+                description: "A funky disco-pop hit with upbeat rhythms.",
+                cover: "Images/ab67616d0000b273bd26ede1ae69327010d49946.jpeg"
+            },
+            "Rolling in the Deep": {
+                artist: "Adele",
+                album: "21",
+                genre: "Soul",
+                release: "Nov 29, 2010",
+                description: "A soulful anthem and Adele's signature song.",
+                cover: "Images/artworks-000022631306-gom0xe-t500x500.jpg"
+            },
+            "Believer": {
+                artist: "Imagine Dragons",
+                album: "Evolve",
+                genre: "Alternative/Indie",
+                release: "Feb 1, 2017",
+                description: "A powerful anthem about pain and growth.",
+                cover: "Images/ab67616d0000b2735675e83f707f1d7271e5cf8a.jpeg"
+            },
+            "Bad Guy": {
+                artist: "Billie Eilish",
+                album: "When We All Fall Asleep, Where Do We Go?",
+                genre: "Pop",
+                release: "Mar 29, 2019",
+                description: "A genre-blending, chart-topping single.",
+                cover: "Images/Billie_Eilish_-_Bad_Guy.png"
+            },
+            "Stay": {
+                artist: "The Kid LAROI & Justin Bieber",
+                album: "F*CK LOVE 3: OVER YOU",
+                genre: "Pop",
+                release: "Jul 9, 2021",
+                description: "A catchy pop collaboration.",
+                cover: "Images/ab67616d00001e0241e31d6ea1d493dd77933ee5.jpeg"
+            },
+            "Sunflower": {
+                artist: "Post Malone & Swae Lee",
+                album: "Spider-Man: Into the Spider-Verse",
+                genre: "Hip-Hop",
+                release: "Oct 18, 2018",
+                description: "A smooth, melodic hit from the Spider-Man soundtrack.",
+                cover: "Images/maxresdefault.jpg"
+            },
+            "Peaches": {
+                artist: "Justin Bieber",
+                album: "Justice",
+                genre: "R&B",
+                release: "Mar 19, 2021",
+                description: "A laid-back, summery R&B track.",
+                cover: "Images/justin_bieber_feat_daniel_caesar_and_giveon_peaches-577800454-large.jpg"
+            },
+            "Good 4 U": {
+                artist: "Olivia Rodrigo",
+                album: "SOUR",
+                genre: "Pop Rock",
+                release: "May 14, 2021",
+                description: "A high-energy pop rock breakup anthem.",
+                cover: "Images/ab67616d0000b273a91c10fe9472d9bd89802e5a.jpeg"
+            },
+            "Midnight Drive": {
+                artist: "Neon Nights",
+                album: "City Lights",
+                genre: "Synthwave",
+                release: "June 7, 2024",
+                description: "A retro-futuristic synthwave track perfect for late-night cruising.",
+                cover: "Images/katrina-stripes.jpg"
+            }
+        };
+        const audioFiles = {
+            "Blinding Lights": "songs/The Weeknd - Blinding Lights (Official Audio).mp3",
+            "Shape of You": "songs/Shape Of You - Ed Sheeran.mp3",
+            "Levitating": "songs/levitating.mp3",
+            "Rolling in the Deep": "songs/Rolling in the deep.mp3",
+            "Believer": "songs/Imagine Dragons - Believer.mp3",
+            "Bad Guy": "songs/Morningstar - Billie Eilish - Bad Guy.mp3",
+            "Stay": "songs/The Kid LAROI Justin Bieber STAY.mp3",
+            "Sunflower": "songs/Post Malone_ Swae Lee - Sunflower (Spider-Man_ Int(MP3_128K).mp3",
+            "Peaches": "songs/peaches.mp3",
+            "Good 4 U": "songs/Olivia Rodrigo - good 4 u_9.mp3"
+        };
+        const data = songData[title] || songData["Blinding Lights"];
+        document.getElementById('song-title').textContent = title;
+        document.getElementById('song-artist').textContent = `Artist: ${data.artist}`;
+        document.getElementById('song-album').textContent = `Album: ${data.album}`;
+        document.getElementById('song-genre').textContent = `Genre: ${data.genre}`;
+        document.getElementById('song-release').textContent = `Release Date: ${data.release}`;
+        document.getElementById('song-description').textContent = `Description: ${data.description}`;
+        document.getElementById('song-cover').src = data.cover;
+        document.getElementById('song-cover').alt = `${title} Cover`;
+
+        // Audio player
+        const audioPlayerDiv = document.getElementById('audio-player');
+        if (audioFiles[title]) {
+            const audioElem = document.createElement('audio');
+            audioElem.controls = true;
+            audioElem.src = audioFiles[title];
+            audioElem.style.width = '100%';
+            audioElem.onerror = () => {
+                audioElem.style.display = 'none';
+                const msg = document.createElement('div');
+                msg.textContent = 'Audio not available.';
+                msg.style.color = '#e74c3c';
+                audioPlayerDiv.appendChild(msg);
+            };
+            audioPlayerDiv.appendChild(audioElem);
+        }
+
+        // Rating logic (demo only)
+        function submitRating() {
+            const rating = parseInt(document.getElementById("rating").value);
+            const avgElem = document.getElementById("avg-rating");
+            const totalElem = document.getElementById("total-ratings");
+            const totalRatings = parseInt(totalElem.textContent);
+            const currentAvg = parseFloat(avgElem.textContent);
+            const newAvg = ((currentAvg * totalRatings) + rating) / (totalRatings + 1);
+            avgElem.textContent = newAvg.toFixed(1);
+            totalElem.textContent = totalRatings + 1;
+            alert("Thank you for rating!");
+        }
+        window.submitRating = submitRating;
         function redirectToHome() {
             window.location.href = "index.html";
         }
-
-        function submitRating() {
-            const rating = parseInt(document.getElementById("rating").value);
-            const avgRatingElem = document.getElementById("avg-rating");
-            const totalRatingsElem = document.getElementById("total-ratings");
-
-            let totalRatings = parseInt(totalRatingsElem.textContent);
-            let currentAvg = parseFloat(avgRatingElem.textContent);
-
-            const newAvg = ((currentAvg * totalRatings) + rating) / (totalRatings + 1);
-            avgRatingElem.textContent = newAvg.toFixed(1);
-            totalRatingsElem.textContent = totalRatings + 1;
-
-            alert("Thank you for rating!");
+        function handleSearch(event) {
+            if (event.key === "Enter") {
+                // Implement search or redirect
+                alert("Search coming soon!");
+            }
         }
     </script>
 </body>
